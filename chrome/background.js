@@ -129,15 +129,24 @@ chrome.commands.onCommand.addListener(function(command) {
     })();
   }
   else if (command == "new-tab-to-the-right") {
-    chrome.tabs.query({
-      currentWindow: true,
-      active: true,
-    }, function(tabs) {
-      const tab = tabs[0];
-      chrome.tabs.create({
+    chrome.tabs.query(
+      {
+        currentWindow: true,
         active: true,
-        index: tab.index+1,
-        openerTabId: tab.id,
+      }, function (tabs) {
+      const active_tab = tabs[0];
+      const active_tab_group = active_tab.groupId;
+      chrome.tabs.create(
+        {
+          active: true,
+          index: active_tab.index + 1,
+          openerTabId: active_tab.id,
+        }, (tab) => {
+        chrome.tabs.group(
+          {
+            tabIds: tab.id,
+            groupId: active_tab_group,
+          });
       });
     });
   }

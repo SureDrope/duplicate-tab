@@ -37,13 +37,14 @@
       "description": "Pop highlighted tabs out to a new window"
     },
     "new-tab-to-the-right": {
+      "suggested_key": { "default": "Ctrl+X" },
       "description": "New tab to the right"
     }
   },
   "permissions": [
+    "tabs",
     "storage"
   ],
   "optional_permissions": [
-    "tabs"
   ]
 }
